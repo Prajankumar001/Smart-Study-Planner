@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Study Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>Smart Study Planner</h1>
+        <p class="lead">Create study tasks, set reminders, track progress and see a visual timeline. Data saved locally in your browser.</p>
+      </div>
+      <div class="controls">
+        <button id="btnNotify" class="btn ghost">🔔 Enable notifications</button>
+        <button id="btnExport" class="btn">📤 Export</button>
+        <button id="btnImport" class="btn ghost">📥 Import</button>
+        <input id="importFile" type="file" accept="application/json" style="display:none">
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card" aria-labelledby="task-form-title">
+        <h3 id="task-form-title">Add / Edit Task</h3>
+        <form id="taskForm">
+          <label>Title<input id="title" type="text" required placeholder="e.g. Review Calculus notes"></label>
+          <label>Subject<input id="subject" type="text" placeholder="e.g. Math"></label>
+          <div class="row">
+            <label style="flex:1">Due Date<input id="due" type="datetime-local"></label>
+            <label style="width:120px">Est. hrs<input id="duration" type="number" min="0" step="0.5" value="1"></label>
+          </div>
+          <div class="row" style="margin-top:8px">
+            <label style="flex:1">Priority
+              <select id="priority">
+                <option value="low">Low</option>
+                <option value="med" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+            <label style="width:160px">Reminder (min before)<input id="reminder" type="number" min="0" value="30"></label>
+          </div>
+          <label>Notes<textarea id="notes" placeholder="Optional details..."></textarea></label>
+          <label class="muted">Progress <input id="progress" type="range" min="0" max="100" value="0"></label>
+          <div class="row" style="margin-top:12px">
+            <button class="btn" id="saveBtn">➕ Add Task</button>
+            <button class="btn ghost" id="resetBtn" type="button">Reset</button>
+            <div class="space"></div>
+            <small class="muted">LocalStorage key: <code>smartStudyPlanner.tasks</code></small>
+          </div>
+        </form>
+        <div class="footer">Tip: Reminders work only while the page is open (or if notifications are enabled).</div>
+      </section>
+
+      <section>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:12px">
+            <input id="search" type="text" placeholder="Search tasks..." style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit">
+            <select id="filterSubject" style="width:160px">
+              <option value="">All subjects</option>
+            </select>
